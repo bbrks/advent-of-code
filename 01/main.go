@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 )
@@ -13,8 +14,8 @@ func finalFloor(i string) int {
 	return u - d
 }
 
-func firstBasementPos(i string) int {
-	pos, floor := 0, 0
+func firstBasementPos(i string) (int, error) {
+	floor := 0
 	for i, c := range input {
 		if string(c) == "(" {
 			floor++
@@ -22,14 +23,20 @@ func firstBasementPos(i string) int {
 			floor--
 		}
 
-		if floor == -1 && pos == 0 {
-			pos = i + 1
+		if floor == -1 {
+			return i + 1, nil
 		}
 	}
-	return pos
+	return 0, errors.New("Basement never reached!")
 }
 
 func main() {
 	fmt.Println("Part One:", finalFloor(input))
-	fmt.Println("Part Two:", firstBasementPos(input))
+
+	pos, err := firstBasementPos(input)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("Part Two:", pos)
+	}
 }
