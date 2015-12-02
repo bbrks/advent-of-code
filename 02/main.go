@@ -10,6 +10,12 @@ import (
 	"strings"
 )
 
+func ribbonLength(b []int) int {
+	length := 2*b[0] + 2*b[1]
+	bow := b[0] * b[1] * b[2]
+	return length + bow
+}
+
 // Returns the surface area of a rectangular cuboid
 // plus the area of the smallest side as extra
 func surfaceArea(b []int) int {
@@ -20,6 +26,7 @@ func surfaceArea(b []int) int {
 
 func main() {
 	sqFt := 0
+	ribbon := 0
 
 	file, err := os.Open("input")
 	if err != nil {
@@ -40,6 +47,7 @@ func main() {
 		}
 		sort.Ints(b) // so we can get the smallest side by [0]*[1]
 		sqFt = sqFt + surfaceArea(b)
+		ribbon = ribbon + ribbonLength(b)
 	}
 
 	if err := scanner.Err(); err != nil {
@@ -47,4 +55,5 @@ func main() {
 	}
 
 	fmt.Println("Total sqft of wrapping paper needed:", sqFt)
+	fmt.Println("Total length of ribbon needed:", ribbon)
 }
