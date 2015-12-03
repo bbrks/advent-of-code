@@ -10,7 +10,10 @@ import (
 	"strings"
 )
 
+// Returns the length of ribbion required to
+// wrap the present plus tie the bow
 func ribbonLength(b []int) int {
+	sort.Ints(b)
 	length := 2*b[0] + 2*b[1]
 	bow := b[0] * b[1] * b[2]
 	return length + bow
@@ -19,6 +22,7 @@ func ribbonLength(b []int) int {
 // Returns the surface area of a rectangular cuboid
 // plus the area of the smallest side as extra
 func surfaceArea(b []int) int {
+	sort.Ints(b)
 	surfaceArea := 2*b[0]*b[1] + 2*b[0]*b[2] + 2*b[1]*b[2]
 	extra := b[0] * b[1] // smallest side
 	return surfaceArea + extra
@@ -45,7 +49,6 @@ func main() {
 			}
 			b = append(b, i)
 		}
-		sort.Ints(b) // so we can get the smallest side by [0]*[1]
 		sqFt = sqFt + surfaceArea(b)
 		ribbon = ribbon + ribbonLength(b)
 	}
