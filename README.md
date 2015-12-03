@@ -3,7 +3,7 @@ Unit tested Golang solutions to the 2015 [Advent of Code](http://adventofcode.co
 
 ## Running
 
-    $ cd 03
+    $ cd 03/
     $ go run main.go
 
 ## Testing
@@ -13,5 +13,5 @@ Unit tested Golang solutions to the 2015 [Advent of Code](http://adventofcode.co
 
 ### Running Individual test
 
-    $ cd 03
+    $ cd 03/
     $ go test
