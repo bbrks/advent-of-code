@@ -1,4 +1,4 @@
-# advent-of-code
+# 2015 Advent of Code
 Unit tested Golang solutions to the 2015 [Advent of Code](http://adventofcode.com/).
 
 ## Running
@@ -7,11 +7,11 @@ Unit tested Golang solutions to the 2015 [Advent of Code](http://adventofcode.co
     $ go run main.go
 
 ## Testing
-### Running All Tests
+#### Running All Tests
 
     $ go test ./...
 
-### Running Individual Test
+#### Running Individual Test
 
     $ cd 03/
     $ go test
