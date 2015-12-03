@@ -28,7 +28,38 @@ func sphericalHouses(inpt *string) int {
 }
 
 func roboSanta(inpt *string) int {
-	return 0
+	sX, sY, rX, rY := 0, 0, 0, 0
+	houses := make(map[string]int)
+
+	// Initial house gets a present!
+	houses[fmt.Sprintf("%d,%d", sX, sY)]++
+
+	for i, c := range *inpt {
+		if i%2 == 0 {
+			if string(c) == ">" {
+				sX++
+			} else if string(c) == "<" {
+				sX--
+			} else if string(c) == "^" {
+				sY++
+			} else if string(c) == "v" {
+				sY--
+			}
+			houses[fmt.Sprintf("%d,%d", sX, sY)]++
+		} else {
+			if string(c) == ">" {
+				rX++
+			} else if string(c) == "<" {
+				rX--
+			} else if string(c) == "^" {
+				rY++
+			} else if string(c) == "v" {
+				rY--
+			}
+			houses[fmt.Sprintf("%d,%d", rX, rY)]++
+		}
+	}
+	return len(houses)
 }
 
 func main() {
