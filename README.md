@@ -11,7 +11,10 @@ Unit tested Golang solutions to the 2015 [Advent of Code](http://adventofcode.co
 
     $ go test ./...
 
-### Running Individual test
+### Running Individual Test
 
     $ cd 03/
     $ go test
+
+## License
+Code released under the [MIT License](LICENSE)
