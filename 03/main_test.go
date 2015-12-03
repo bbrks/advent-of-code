@@ -21,8 +21,8 @@ func TestSphericalHouses(t *testing.T) {
 	for scanner.Scan() {
 		line := strings.Split(scanner.Text(), ",")
 		ret := sphericalHouses(&line[0])
-		expect, _ := strconv.Atoi(line[1])
-		if ret != expect {
+		expect, err := strconv.Atoi(line[1])
+		if err == nil && ret != expect {
 			t.Errorf("Test failed, got: '%d', expected: '%d'", ret, expect)
 		}
 	}
@@ -43,8 +43,8 @@ func TestRobotSanta(t *testing.T) {
 	for scanner.Scan() {
 		line := strings.Split(scanner.Text(), ",")
 		ret := roboSanta(&line[0])
-		expect, _ := strconv.Atoi(line[2])
-		if ret != expect {
+		expect, err := strconv.Atoi(line[2])
+		if err == nil && ret != expect {
 			t.Errorf("Test failed, got: '%d', expected: '%d'", ret, expect)
 		}
 	}
