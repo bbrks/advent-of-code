@@ -1,4 +1,4 @@
-# 2015 Advent of Code
+# 2015 Advent of Code [![Build Status](https://travis-ci.org/bbrks/advent-of-code.svg?branch=master)](https://travis-ci.org/bbrks/advent-of-code)
 Unit tested Golang solutions to the 2015 [Advent of Code](http://adventofcode.com/).
 
 ## Running
