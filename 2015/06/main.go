@@ -14,29 +14,50 @@ const (
 	lightsY = 1000
 )
 
-var (
-	lights [lightsX][lightsY]bool
-	lit    int // keep track of how many lights are on
+var inputRegexp = regexp.MustCompile(`(turn off|turn on|toggle) (\d+),(\d+) through (\d+),(\d+)`)
 
-	inputRegexp = regexp.MustCompile(`(turn off|turn on|toggle) (\d+),(\d+) through (\d+),(\d+)`)
-)
+type lights struct {
+	lights          [lightsX][lightsY]int
+	totalLitCount   int
+	totalBrightness int
+}
 
 // flickLights in inclusive coords with given cmd and keep track of lit count while we go
-func flickLights(x1, y1, x2, y2 uint, cmd command) int {
+func (l *lights) flickLights(x1, y1, x2, y2 uint, cmd command) {
 	for x := x1; x <= x2; x++ {
 		for y := y1; y <= y2; y++ {
-			if lights[x][y] && (cmd == off || cmd == toggle) {
+			if l.lights[x][y] == 1 && (cmd == off || cmd == toggle) {
 				// light is on already - and we want to switch it off
-				lit--
-				lights[x][y] = false
-			} else if !lights[x][y] && (cmd == on || cmd == toggle) {
+				l.totalLitCount--
+				l.lights[x][y] = 0
+			} else if l.lights[x][y] == 0 && (cmd == on || cmd == toggle) {
 				// light is off - and we want to switch it on
-				lit++
-				lights[x][y] = true
+				l.totalLitCount++
+				l.lights[x][y] = 1
 			}
 		}
 	}
-	return lit
+}
+
+// twiddleLights in inclusive coords with given cmd and keep track of total brightness count while we go
+func (l *lights) twiddleLights(x1, y1, x2, y2 uint, cmd command) {
+	for x := x1; x <= x2; x++ {
+		for y := y1; y <= y2; y++ {
+			var change int
+			switch cmd {
+			case off:
+				if l.lights[x][y] > 0 {
+					change = -1
+				}
+			case on:
+				change = 1
+			case toggle:
+				change = 2
+			}
+			l.lights[x][y] += change
+			l.totalBrightness += change
+		}
+	}
 }
 
 func parseInput(s string) (x1, y1, x2, y2 uint, cmd command) {
@@ -83,17 +104,21 @@ func main() {
 	}
 	defer file.Close()
 
-	var lastLitCount int
+	part1Lights := lights{}
+	part2Lights := lights{}
+
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		txt := scanner.Text()
-		startX, startY, endX, endY, cmd := parseInput(txt)
-		lastLitCount = flickLights(startX, startY, endX, endY, cmd)
+		x1, y1, x2, y2, cmd := parseInput(txt)
+		part1Lights.flickLights(x1, y1, x2, y2, cmd)
+		part2Lights.twiddleLights(x1, y1, x2, y2, cmd)
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Lights lit: %d\n", lastLitCount)
+	fmt.Printf("Part1: Lights lit: %d\n", part1Lights.totalLitCount)
+	fmt.Printf("Part2: Total brightness: %d\n", part2Lights.totalBrightness)
 }
