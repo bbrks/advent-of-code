@@ -61,4 +61,16 @@ func main() {
 	output := RunIntcode(input)
 	fmt.Printf("Part 1: Position 0: %v\n", output[0])
 
+	for noun := 0; noun < 99; noun++ {
+		for verb := 0; verb < 99; verb++ {
+			// modify input
+			input[1] = noun
+			input[2] = verb
+			output = RunIntcode(input)
+			if output[0] == 19690720 {
+				fmt.Printf("Part 2: %v\n", 100*noun+verb)
+			}
+		}
+	}
+
 }
