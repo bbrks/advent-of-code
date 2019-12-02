@@ -17,10 +17,10 @@ func TestFuelRequirement(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run("", func(t *testing.T) {
-			RunIntcode(test.input)
-			for i, outputVal := range test.input {
-				if outputVal != test.expectedOutput[i] {
-					t.Errorf("output at idx %d did not match expected %v %v", i, test.input, test.expectedOutput)
+			output := RunIntcode(test.input)
+			for i, val := range output {
+				if val != test.expectedOutput[i] {
+					t.Errorf("output at idx %d in %v did not match expected %v", i, test.input, test.expectedOutput)
 				}
 			}
 		})

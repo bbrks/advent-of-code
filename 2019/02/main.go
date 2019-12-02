@@ -9,21 +9,26 @@ import (
 	"strings"
 )
 
-func RunIntcode(input []int) {
+func RunIntcode(input []int) []int {
+	output := make([]int, len(input))
+	for i, val := range input {
+		output[i] = val
+	}
+
 	for i := 0; i < len(input); i += 4 {
-		switch input[i] {
+		switch output[i] {
 		case 1:
 			// add
-			input[input[i+3]] = input[input[i+1]] + input[input[i+2]]
-
+			output[output[i+3]] = output[output[i+1]] + output[output[i+2]]
 		case 2:
 			// multiply
-			input[input[i+3]] = input[input[i+1]] * input[input[i+2]]
+			output[output[i+3]] = output[output[i+1]] * output[output[i+2]]
 		case 99:
 			// halt
 			break
 		}
 	}
+	return output
 }
 
 func main() {
@@ -53,8 +58,7 @@ func main() {
 	// modify input
 	input[1] = 12
 	input[2] = 2
-
-	RunIntcode(input)
-	fmt.Printf("Position 0: %v\n", input[0])
+	output := RunIntcode(input)
+	fmt.Printf("Part 1: Position 0: %v\n", output[0])
 
 }
