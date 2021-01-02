@@ -11,9 +11,7 @@ import (
 
 func RunIntcode(input []int) []int {
 	output := make([]int, len(input))
-	for i, val := range input {
-		output[i] = val
-	}
+	copy(output, input)
 
 	for i := 0; i < len(input); i += 4 {
 		switch output[i] {

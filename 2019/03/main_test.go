@@ -49,7 +49,7 @@ U98,R91,D20,R16,D67,R40,U7,R15,U6,R7`,
 			}
 			for _, val := range test.expectedIntersections {
 				var found bool
-				for val2, _ := range i {
+				for val2 := range i {
 					if val2 == val {
 						found = true
 						break

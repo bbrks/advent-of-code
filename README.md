@@ -1,4 +1,4 @@
-# Advent of Code [![Build Status](https://travis-ci.org/bbrks/advent-of-code.svg?branch=master)](https://travis-ci.org/bbrks/advent-of-code)
+# Advent of Code
 Unit tested Golang solutions to [Advent of Code](http://adventofcode.com/).
 
 ## Running
@@ -18,4 +18,3 @@ Unit tested Golang solutions to [Advent of Code](http://adventofcode.com/).
 
 ## License
 Code released under the [MIT License](LICENSE)
-
