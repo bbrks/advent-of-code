@@ -21,20 +21,33 @@ func main() {
 		log.Fatal(err)
 	}
 
-	depthIncreases, err := dayOne(string(b))
+	depthIncreases, err := dayOnePartOne(string(b))
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	fmt.Printf("Number of depth increases: %v\n", depthIncreases)
+
+	slidingWindowDepthIncreases, err := dayOnePartTwo(string(b))
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Number of sliding-window depth increases: %v\n", slidingWindowDepthIncreases)
 }
 
-func dayOne(input string) (depthIncreases int, err error) {
+func dayOnePartOne(input string) (depthIncreases int, err error) {
 	depths, err := parseDepthReadings(input)
 	if err != nil {
 		return 0, err
 	}
 	return measureDepthIncreases(depths), nil
+}
+
+func dayOnePartTwo(input string) (depthIncreases int, err error) {
+	depths, err := parseDepthReadings(input)
+	if err != nil {
+		return 0, err
+	}
+	return measureSlidingWindowDepthIncreases(depths), nil
 }
 
 func parseDepthReadings(input string) ([]int, error) {
@@ -57,4 +70,28 @@ func measureDepthIncreases(depths []int) (depthIncreases int) {
 		}
 	}
 	return depthIncreases
+}
+
+func measureSlidingWindowDepthIncreases(depths []int) (depthIncreases int) {
+	slidingWindows := calculateSlidingWindows(depths)
+	return measureDepthIncreases(slidingWindows)
+}
+
+func calculateSlidingWindows(depths []int) []int {
+	var slidingWindows []int
+
+	const windowWidth = 3
+
+	for i := range depths {
+		if i < windowWidth-1 {
+			continue
+		}
+		var windowVal int
+		for j := 0; j < windowWidth; j++ {
+			windowVal += depths[i-j]
+		}
+		slidingWindows = append(slidingWindows, windowVal)
+	}
+
+	return slidingWindows
 }
