@@ -21,20 +21,20 @@ func main() {
 		log.Fatal(err)
 	}
 
-	val, err := dayTwoPartOne(string(b))
+	val, err := partOne(string(b))
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("day one part one: %d\n", val)
 
-	val, err = dayTwoPartTwo(string(b))
+	val, err = partTwo(string(b))
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("day one part two: %d\n", val)
 }
 
-func dayTwoPartOne(input string) (int, error) {
+func partOne(input string) (int, error) {
 	instructions, err := parseInput(input)
 	if err != nil {
 		return 0, err
@@ -49,7 +49,7 @@ func dayTwoPartOne(input string) (int, error) {
 	return val, nil
 }
 
-func dayTwoPartTwo(input string) (int, error) {
+func partTwo(input string) (int, error) {
 	instructions, err := parseInput(input)
 	if err != nil {
 		return 0, err

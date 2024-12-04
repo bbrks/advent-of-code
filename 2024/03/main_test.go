@@ -22,7 +22,7 @@ func TestDayThree(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run("part 1", func(t *testing.T) {
-			result, err := dayTwoPartOne(test.input)
+			result, err := partOne(test.input)
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}
@@ -31,7 +31,7 @@ func TestDayThree(t *testing.T) {
 			}
 		})
 		t.Run("part 2", func(t *testing.T) {
-			result, err := dayTwoPartTwo(test.input)
+			result, err := partTwo(test.input)
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}
