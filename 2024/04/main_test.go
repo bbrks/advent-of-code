@@ -32,26 +32,13 @@ SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX`,
 			expectedPartOne: 18,
-			expectedPartTwo: 13,
+			expectedPartTwo: 9,
 		},
 		{
 			input: `M.S
 .A.
 M.S`,
 			expectedPartTwo: 1,
-		},
-		{
-			input: `.M.S......
-..A..MSMS.
-.M.S.MAA..
-..A.ASMSM.
-.M.S.M....
-..........
-S.S.S.S.S.
-.A.A.A.A..
-M.M.M.M.M.
-..........`,
-			expectedPartTwo: 9,
 		},
 	}
 
